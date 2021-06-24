@@ -1,0 +1,5 @@
+#define V_BATT_PIN A1
+#define LIGHT_REQ_PIN A2
+#define LIGHT_SENSE_PIN A0
+
+#define LIGHT_OUT_PIN 2
