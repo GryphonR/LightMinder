@@ -1,0 +1,53 @@
+#include <Arduino.h>
+// #include <avr/io.h>
+#include "pinout.h"
+
+#define setBit(reg, bit) (reg = reg | (1 << bit))
+#define clearBit(reg, bit) (reg = reg & ~(1 << bit))
+#define toggleBit(reg, bit) (reg = reg ^ (1 << bit))
+#define clearFlag(reg, bit) (reg = reg | (1 << bit))
+
+int count = 0;
+
+void setup() {
+  pinMode(2, INPUT); // Protect pin for PCB v0.3 Prototype error
+  
+
+  pinMode(V_BATT_PIN, INPUT);
+  pinMode(LIGHT_REQ_PIN, INPUT);
+  pinMode(LIGHT_SENSE_PIN, INPUT);
+
+  pinMode(LIGHT_OUT_PIN, OUTPUT);
+  pinMode(LIGHT_OUT_LED, OUTPUT);
+  pinMode(ERROR_LED, OUTPUT);
+
+  Serial.begin(9600);
+  analogReference(INTERNAL);
+  analogRead(V_BATT_PIN);
+}
+
+void loop() {
+  analogReference(EXTERNAL);
+  int in = analogRead(LIGHT_SENSE_PIN);
+  float voltage = ((float)in*3.3)/1024.0;
+  Serial.print(voltage);
+  Serial.print(", ");
+  analogReference(INTERNAL);
+  in = analogRead(LIGHT_REQ_PIN);
+  delay(1);
+  in = analogRead(LIGHT_REQ_PIN);
+  voltage = ((float)in * 16.33) / 1024.0;
+  Serial.print(voltage);
+  Serial.print(", ");
+  in = analogRead(V_BATT_PIN);
+  voltage = ((float)in * 16.33) / 1024.0;
+  Serial.println(voltage);
+  // Serial.println(in);
+  delay(50);
+  // count++;
+  // if(count>256)
+  // count = 0;
+  // analogWrite(LIGHT_OUT_PIN, count);
+  // analogWrite(LIGHT_OUT_LED, 256-count);
+  // delay(10);
+}
