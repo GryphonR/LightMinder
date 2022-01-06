@@ -1,8 +1,6 @@
 #define DEBUG 1
 
 #define LIGHT_LEVEL_CHECK_INTERVAL 1000     // Check Ambient Light Level every x ms
-
-#define LIGHT_CHECK_INTERVAL 500             // Check Dipped Beam Switch every x ms
 #define LIGHT_FILTER_LENGTH 20              // Number of readings to average ambient light level over
 
 #define LIGHT_TRIGGER_LEVEL_UPPER 600       // ADC Count for ambient light higher schmitt triger band

@@ -57,7 +57,7 @@ void setup() {
     Serial.print(F("Voltage Averaged over (ms): "));
     Serial.println(VOLTAGE_CHECK_INTERVAL * VOLTAGE_FILTER_LENGTH);
     Serial.print(F("Light Averaged over (ms): "));
-    Serial.println(LIGHT_CHECK_INTERVAL * LIGHT_FILTER_LENGTH);
+    Serial.println(LIGHT_LEVEL_CHECK_INTERVAL * LIGHT_FILTER_LENGTH);
   }
 
   pinMode(V_BATT_PIN, INPUT);
@@ -81,7 +81,7 @@ void loop() {
     voltageLastTime = millis();
   }
 
-  if(lightEnabled && (millis() - lightLastTime > LIGHT_CHECK_INTERVAL)){
+  if(lightEnabled && (millis() - lightLastTime > LIGHT_LEVEL_CHECK_INTERVAL)){
     lightSensorRead();
     lightLastTime = millis();
   }
